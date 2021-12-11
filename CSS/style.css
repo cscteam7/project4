@@ -161,3 +161,6 @@ header{
     margin: 5px 0 0 0;
     font-size: 14px;
 }
+.ddata, .ddata th, .ddata td {
+    border:1px solid black;
+}

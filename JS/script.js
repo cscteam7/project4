@@ -56,7 +56,6 @@ $(function() {
             alert("Wrong CVV");
         } else {
             // Everything is correct. Add your form submission code here.
-            alert("Everything is correct");
         }
     });
 });

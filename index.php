@@ -1,4 +1,37 @@
+<?php
+$server = "127.0.0.1";
+$username ="root";
+$password = "Project4*";
+$database = "mydb";
+$port = "3306";
+$conn = new mysqli($server,$username,$password,$database,$port);
+
+// Check connection
+if ($conn -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $conn -> connect_error;
+  exit();
+}
+// sql to create table
+$sql = "CREATE TABLE IF NOT EXISTS Customer (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    cname VARCHAR(30) NOT NULL,
+    licensePlate VARCHAR(30) NOT NULL,
+    parkslot VARCHAR(50),
+    price Int(10),
+    enter_date VARCHAR(258) NOT NULL,
+    exit_date VARCHAR(258) NOT NULL
+    )";
+    
+    if ($conn->query($sql) === TRUE) {
+      echo "Table Customer created successfully";
+    } else {
+      echo "Error creating table: " . $conn->error;
+    }
+    
+    $conn->close();
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -107,7 +140,7 @@
                         <h1>Confirm Purchase</h1>
                     </div>
                     <div class="payment">
-                        <form>
+                        <form action="connection.php" method="POST">
                             <div class="form-group Customer">
                                 <label for="Customer">Customer</label>
                                 <input type="text" class="form-control" id="Customer">
@@ -145,6 +178,12 @@
                                     <option value="21"> 2026</option>
                                 </select>
                             </div>
+                            <input type="hidden" id="custname" value=" ">
+                            <input type="hidden" id="pslot" value=" ">
+                            <input type="hidden" id="price" value=" ">
+                            <input type="hidden" id="plate" value=" ">
+                            <input type="hidden" id="exitday" value=" ">
+                            <input type="hidden" id="enteryday" value=" ">
                             <div class="form-group" id="credit_cards">
                                 <img src="./Images/visa.jpg" id="visa">
                                 <img src="./Images/mastercard.jpg" id="mastercard">
@@ -153,7 +192,31 @@
                             <div class="form-group" id="pay-now">
                                 <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
                             </div>
+
                         </form>
+                        <h3>Dummy Credit Card numbers</h3>
+                        <table class="ddata">
+                            <header>
+                                <tr>
+                                    <th scope="col">amex</th>
+                                    <th scope="col">Visa</th>
+                                    <th scope="col">mastercard</th>    
+                                </tr>
+                            </header>
+                            <tbody>
+                                <tr>
+                                    <td> 344511112046512</td>
+                                    <td> 4188415419331299</td>
+                                    <td> 5121297817475606</td>
+                                </tr>
+                                <tr>
+                                    <td> 349208437315764</td>
+                                    <td> 4185126935301111</td>
+                                    <td> 5136028068398137</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                       
                     </div>
                 </div>
                     
