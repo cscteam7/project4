@@ -30,5 +30,4 @@ if($rs)
 {
 	echo "Customer Records Inserted";
 }
-
 ?>

@@ -57,13 +57,12 @@ class UI{
                             <td><button class="btn btn-danger delete">X</button></td>
                         `;
         tableBody.appendChild(row);
-        document.getElementById("custname").value = `${entry.Customer}`; 
-        document.getElementById("plate").value = `${entry.licensePlate}`; 
-        document.getElementById("exitday").value = `${entry.exitDate}`;  
-        document.getElementById("enteryday").value = `${entry.entryDate}`; 
-        document.getElementById("price").value = price;
-        document.getElementById("pslot").value = `${entry.parkslots}`;
+        
+        var x = document.getElementById("parkslots");
+        x.remove(x.selectedIndex);
+          
     }
+
     static clearInput(){
         //Selects all the inputs
         const inputs = document.querySelectorAll('.form-control');

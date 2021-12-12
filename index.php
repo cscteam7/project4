@@ -23,7 +23,6 @@ $sql = "CREATE TABLE IF NOT EXISTS Customer (
     )";
     
     if ($conn->query($sql) === TRUE) {
-      echo "Table Customer created successfully";
     } else {
       echo "Error creating table: " . $conn->error;
     }
@@ -75,16 +74,40 @@ $sql = "CREATE TABLE IF NOT EXISTS Customer (
                         <div class="form-group">
                             <label for="parkslot"> Parking Sections: </label>
                             <select name="parkslots" id="parkslots" size="11" required>
-                                <option value="p1">P1 Section 1</option>
-                                <option value="p2">P1 Section 2</option>
-                                <option value="p3">P1 Section 3</option>
-                                <option value="p4">P1 Section 4</option>
-                                <option value="p5">P1 Section 5</option>
-                                <option value="p6">P1 Section 6</option>
-                                <option value="p7">P1 Section 7</option>
-                                <option value="p8">P1 Section 8</option>
-                                <option value="p9">P1 Section 9</option>
-                                <option value="p10">P1 Section 10</option>
+                            <?php
+                            /* Attempt MySQL server connection.*/
+                            $server = "127.0.0.1";
+                            $username ="root";
+                            $password = "Project4*";
+                            $database = "mydb";
+                            $port = "3306";
+                        
+                            $link = mysqli_connect($server,$username,$password,$database,$port);
+                            
+                            // Check connection
+                            if($link === false){
+                                die("ERROR: Could not connect. " . mysqli_connect_error());
+                            }
+                            
+                            // Attempt select query execution
+                            $sql = "SELECT * FROM parking";
+                            if($result = mysqli_query($link, $sql)){
+                                if(mysqli_num_rows($result) > 0){
+                                    while($row = mysqli_fetch_array($result)){
+                                        echo '<option value ="p'.$row['id'].'">'.$row['psection'] . "</option>";
+                                    }
+                                    // Free result set
+                                    mysqli_free_result($result);
+                                } else{
+                                    echo "No records matching your query were found.";
+                                }
+                            } else{
+                                echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                            }
+                            
+                            // Close connection
+                            mysqli_close($link);
+                            ?>
                             </select>
                         </div>
                         <div class="form-group">
